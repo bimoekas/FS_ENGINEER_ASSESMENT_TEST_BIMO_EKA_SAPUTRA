@@ -1,0 +1,40 @@
+from flask import jsonify
+from . import tasks_bp
+from model.Task import Task
+from sqlalchemy.exc import SQLAlchemyError
+
+
+@tasks_bp.route("/<int:task_id>", methods=["GET"])
+def get_task(task_id):
+    task = Task.query.get_or_404(task_id)
+
+    try:
+        response_data = {
+            "id": task.id,
+            "title": task.title,
+            "is_complete": task.is_complete,
+            "created_at": task.created_at.isoformat(),
+            "updated_at": task.updated_at.isoformat(),
+        }
+
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "message": "Task succesfully fetched!",
+                    "data": response_data,
+                }
+            ),
+            200,
+        )
+
+    except SQLAlchemyError:
+        return (
+            jsonify(
+                {
+                    "success": False,
+                    "error": "Failed to fetch task!",
+                }
+            ),
+            500,
+        )

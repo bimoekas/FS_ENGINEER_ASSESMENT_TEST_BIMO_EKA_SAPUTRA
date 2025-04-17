@@ -1,0 +1,12 @@
+# Global
+node_modules/
+.env
+__pycache__/
+*.pyc
+
+# Frontend
+/frontend/dist
+/frontend/.vite
+
+# Backend
+/backend/.venv

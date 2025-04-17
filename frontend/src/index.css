@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@font-face {
+  font-family: Poppins;
+  src: url('/fonts/Poppins-Regular.ttf');
+}
+
+@theme {
+  --font-poppins: Poppins, 'sans-serif';
+}
